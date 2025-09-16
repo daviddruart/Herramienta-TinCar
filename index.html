@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISO 9001 - Herramienta TinCar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      background: #940253;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .container {
+      margin-top: 30px;
+      text-align: center;
+      width: 80%;
+      max-width: 800px;
+    }
+
+    button {
+      background: #940253;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #6c0240;
+    }
+
+    #output {
+      margin-top: 30px;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: left;
+      min-height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Gestión de Calidad ISO 9001 - Proyecto TinCar</h1>
+  </header>
+
+  <div class="container">
+    <button onclick="mostrar('implementacion')">Implementación</button>
+    <button onclick="mostrar('capacitacion')">Capacitación</button>
+    <button onclick="mostrar('auditoria')">Auditoría</button>
+
+    <div id="output">
+      <p>Selecciona una opción para ver la información.</p>
+    </div>
+  </div>
+
+  <script>
+    function mostrar(opcion) {
+      let contenido = "";
+
+      if (opcion === "implementacion") {
+        contenido = `
+          <h2>✅ Implementación ISO 9001</h2>
+          <ul>
+            <li>Identificación de procesos.</li>
+            <li>Documentación de procedimientos.</li>
+            <li>Gestión de riesgos.</li>
+            <li>Seguimiento de indicadores de calidad.</li>
+            <li>Mejora continua en el proyecto TinCar.</li>
+          </ul>`;
+      } else if (opcion === "capacitacion") {
+        contenido = `
+          <h2>📘 Capacitación ISO 9001</h2>
+          <ul>
+            <li>Roles y responsabilidades en TinCar.</li>
+            <li>Uso de la aplicación y manejo de datos.</li>
+            <li>Buenas prácticas en servicio al cliente.</li>
+            <li>Talleres de mejora continua.</li>
+            <li>Conciencia sobre seguridad y calidad.</li>
+          </ul>`;
+      } else if (opcion === "auditoria") {
+        contenido = `
+          <h2>🔍 Auditoría ISO 9001</h2>
+          <p>Checklist básico:</p>
+          <ol>
+            <li>¿Están documentados los procesos?</li>
+            <li>¿Se cumplen los requisitos del cliente?</li>
+            <li>¿Existe trazabilidad en registros?</li>
+            <li>¿Se realiza seguimiento a no conformidades?</li>
+            <li>¿Se han tomado acciones correctivas?</li>
+          </ol>
+          <p><strong>Resultado esperado:</strong> Conforme / No conforme.</p>`;
+      }
+
+      document.getElementById("output").innerHTML = contenido;
+    }
+  </script>
+</body>
+</html>
