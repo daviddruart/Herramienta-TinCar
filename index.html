@@ -1,126 +1,57 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ISO 9001 - Ciclo PHVA</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    header {
-      background: #940253;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      width: 100%;
-    }
-
-    .container {
-      margin-top: 30px;
-      text-align: center;
-      width: 85%;
-      max-width: 1000px;
-    }
-
-    button {
-      background: #940253;
-      color: white;
-      border: none;
-      padding: 15px 25px;
-      margin: 10px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    button:hover {
-      background: #6c0240;
-    }
-
-    #output {
-      margin-top: 30px;
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: left;
-      min-height: 250px;
-    }
-  </style>
+  <title>Herramienta TinCar</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Gestión de Calidad ISO 9001</h1>
-    <h2>Ciclo PHVA aplicado a proyectos</h2>
+    <h1>Gestión de calidad - ISO 9001 - TinCar</h1>
+    <p>Implementacón • Capacitación • Auditoría</p>
   </header>
-
   <div class="container">
-    <button onclick="mostrar('plan')">Planificar (Plan)</button>
-    <button onclick="mostrar('do')">Hacer (Do)</button>
-    <button onclick="mostrar('check')">Verificar (Check)</button>
-    <button onclick="mostrar('act')">Actuar (Act)</button>
+    <button onclick="toggleContent('impl')">Implementación</button>
+    <button onclick="toggleContent('cap')">Capacitación</button>
+    <button onclick="toggleContent('aud')">Auditoría</button>
 
-    <div id="output">
-      <p>Selecciona una fase del ciclo PHVA para ver la información.</p>
+    <div id="impl" class="content">
+      <h2>Implementación</h2>
+      <p>Documentos:</p>
+      <ul>
+        <li>Diagnóstico inicial de brechas respecto a la norma.</li>
+        <li>Definición de la política y los objetivos de calidad.</li>
+        <li>Documentación de procesos, procedimientos e indicadores.</li>
+        <li>Establecimiento de controles y responsabilidades.</li>
+        <li>Integración de la gestión de calidad en la operación diaria.</li>
+      </ul>
+      <p><b>Subir archivos:</b></p>
+      <input type="file" multiple>
+    </div>
+
+    <div id="cap" class="content">
+      <h2>Capacitación</h2>
+      <ul>
+        <li>Formación en la norma ISO 9001 y sus requisitos.</li>
+        <li>Capacitación en procedimientos, roles y responsabilidades.</li>
+        <li>Sensibilización sobre la importancia de la satisfacción del cliente y la mejora continua.</li>
+        <li>Entrenamiento en herramientas de control y medición de procesos.</li>
+      </ul>
+    </div>
+
+    <div id="aud" class="content">
+      <h2>Auditoría</h2>
+      <ul>
+        <li><b>Auditoría interna:</b> realizada por la propia organización para revisar el cumplimiento de procesos.</li>
+        <li><b>Auditoría externa (de certificación):</b> realizada por un ente acreditado.</li>
+        <li>Identificación de no conformidades, observaciones y áreas de mejora.</li>
+        <li>Planes de acción correctiva y seguimiento.</li>
+      </ul>
     </div>
   </div>
 
-  <script>
-    function mostrar(fase) {
-      let contenido = "";
-
-      if (fase === "plan") {
-        contenido = `
-          <h2>📌 Planificar (Plan)</h2>
-          <ul>
-            <li>Definir objetivos del proyecto (tiempo, calidad, seguridad).</li>
-            <li>Elaborar cronograma y presupuesto.</li>
-            <li>Identificar riesgos y establecer la matriz de riesgos.</li>
-            <li>Definir indicadores de desempeño (KPIs).</li>
-            <li>Asegurar requisitos de calidad y seguridad de la información.</li>
-          </ul>`;
-      } else if (fase === "do") {
-        contenido = `
-          <h2>⚙️ Hacer (Do)</h2>
-          <ul>
-            <li>Desarrollo modular (autenticación, pedidos, inventario, reportes).</li>
-            <li>Aplicación de revisiones de código y buenas prácticas.</li>
-            <li>Uso de integración continua (CI/CD).</li>
-            <li>Implementación de pruebas automatizadas.</li>
-            <li>Seguimiento diario con metodología Scrum (daily meetings).</li>
-          </ul>`;
-      } else if (fase === "check") {
-        contenido = `
-          <h2>🔍 Verificar (Check)</h2>
-          <ul>
-            <li>Preparación y ejecución de pruebas de aceptación con el cliente.</li>
-            <li>Medición de tiempos de respuesta (&lt; 2 segundos).</li>
-            <li>Evaluación de usabilidad y cumplimiento de requisitos.</li>
-            <li>Auditorías internas para validar conformidad con ISO 9001.</li>
-          </ul>`;
-      } else if (fase === "act") {
-        contenido = `
-          <h2>🚀 Actuar (Act)</h2>
-          <ul>
-            <li>Análisis de resultados y retroalimentación.</li>
-            <li>Acciones correctivas y preventivas (ej. optimización de consultas SQL).</li>
-            <li>Implementación de mejoras adicionales sugeridas.</li>
-            <li>Revisión por la dirección para garantizar eficacia.</li>
-            <li>Compromiso con la mejora continua.</li>
-          </ul>`;
-      }
-
-      document.getElementById("output").innerHTML = contenido;
-    }
-  </script>
+<script src="script.js"></script>
+  
 </body>
 </html>
