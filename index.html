@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ISO 9001 - Herramienta TinCar</title>
+  <title>ISO 9001 - Ciclo PHVA</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -26,8 +26,8 @@
     .container {
       margin-top: 30px;
       text-align: center;
-      width: 80%;
-      max-width: 800px;
+      width: 85%;
+      max-width: 1000px;
     }
 
     button {
@@ -53,61 +53,70 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
       text-align: left;
-      min-height: 200px;
+      min-height: 250px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Gestión de Calidad ISO 9001 - Proyecto TinCar</h1>
+    <h1>Gestión de Calidad ISO 9001</h1>
+    <h2>Ciclo PHVA aplicado a proyectos</h2>
   </header>
 
   <div class="container">
-    <button onclick="mostrar('implementacion')">Implementación</button>
-    <button onclick="mostrar('capacitacion')">Capacitación</button>
-    <button onclick="mostrar('auditoria')">Auditoría</button>
+    <button onclick="mostrar('plan')">Planificar (Plan)</button>
+    <button onclick="mostrar('do')">Hacer (Do)</button>
+    <button onclick="mostrar('check')">Verificar (Check)</button>
+    <button onclick="mostrar('act')">Actuar (Act)</button>
 
     <div id="output">
-      <p>Selecciona una opción para ver la información.</p>
+      <p>Selecciona una fase del ciclo PHVA para ver la información.</p>
     </div>
   </div>
 
   <script>
-    function mostrar(opcion) {
+    function mostrar(fase) {
       let contenido = "";
 
-      if (opcion === "implementacion") {
+      if (fase === "plan") {
         contenido = `
-          <h2>✅ Implementación ISO 9001</h2>
+          <h2>📌 Planificar (Plan)</h2>
           <ul>
-            <li>Identificación de procesos.</li>
-            <li>Documentación de procedimientos.</li>
-            <li>Gestión de riesgos.</li>
-            <li>Seguimiento de indicadores de calidad.</li>
-            <li>Mejora continua en el proyecto TinCar.</li>
+            <li>Definir objetivos del proyecto (tiempo, calidad, seguridad).</li>
+            <li>Elaborar cronograma y presupuesto.</li>
+            <li>Identificar riesgos y establecer la matriz de riesgos.</li>
+            <li>Definir indicadores de desempeño (KPIs).</li>
+            <li>Asegurar requisitos de calidad y seguridad de la información.</li>
           </ul>`;
-      } else if (opcion === "capacitacion") {
+      } else if (fase === "do") {
         contenido = `
-          <h2>📘 Capacitación ISO 9001</h2>
+          <h2>⚙️ Hacer (Do)</h2>
           <ul>
-            <li>Roles y responsabilidades en TinCar.</li>
-            <li>Uso de la aplicación y manejo de datos.</li>
-            <li>Buenas prácticas en servicio al cliente.</li>
-            <li>Talleres de mejora continua.</li>
-            <li>Conciencia sobre seguridad y calidad.</li>
+            <li>Desarrollo modular (autenticación, pedidos, inventario, reportes).</li>
+            <li>Aplicación de revisiones de código y buenas prácticas.</li>
+            <li>Uso de integración continua (CI/CD).</li>
+            <li>Implementación de pruebas automatizadas.</li>
+            <li>Seguimiento diario con metodología Scrum (daily meetings).</li>
           </ul>`;
-      } else if (opcion === "auditoria") {
+      } else if (fase === "check") {
         contenido = `
-          <h2>🔍 Auditoría ISO 9001</h2>
-          <p>Checklist básico:</p>
-          <ol>
-            <li>¿Están documentados los procesos?</li>
-            <li>¿Se cumplen los requisitos del cliente?</li>
-            <li>¿Existe trazabilidad en registros?</li>
-            <li>¿Se realiza seguimiento a no conformidades?</li>
-            <li>¿Se han tomado acciones correctivas?</li>
-          </ol>
-          <p><strong>Resultado esperado:</strong> Conforme / No conforme.</p>`;
+          <h2>🔍 Verificar (Check)</h2>
+          <ul>
+            <li>Preparación y ejecución de pruebas de aceptación con el cliente.</li>
+            <li>Medición de tiempos de respuesta (&lt; 2 segundos).</li>
+            <li>Evaluación de usabilidad y cumplimiento de requisitos.</li>
+            <li>Auditorías internas para validar conformidad con ISO 9001.</li>
+          </ul>`;
+      } else if (fase === "act") {
+        contenido = `
+          <h2>🚀 Actuar (Act)</h2>
+          <ul>
+            <li>Análisis de resultados y retroalimentación.</li>
+            <li>Acciones correctivas y preventivas (ej. optimización de consultas SQL).</li>
+            <li>Implementación de mejoras adicionales sugeridas.</li>
+            <li>Revisión por la dirección para garantizar eficacia.</li>
+            <li>Compromiso con la mejora continua.</li>
+          </ul>`;
       }
 
       document.getElementById("output").innerHTML = contenido;
