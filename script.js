@@ -2,7 +2,8 @@
 function toggleContent(id) {
   let sections = document.querySelectorAll('.content');
   sections.forEach(sec => sec.style.display = 'none');
-  document.getElementById(id).style.display = 'block';
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'block';
 }
 
 // ===============================
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderFileList() {
+    if (!fileList) return;
     fileList.innerHTML = ""; 
     if (filesArray.length > 0) {
       const ul = document.createElement("ul");
@@ -48,6 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
       fileList.innerHTML = "<p>No hay archivos seleccionados.</p>";
     }
   }
+
+  // opcional: mostrar la sección implementación por defecto
+  // toggleContent('impl');
 });
 
 // ===============================
@@ -59,7 +64,9 @@ let participant = ""; // 👉 Nombre del participante
 
 // Iniciar capacitación pidiendo nombre
 function startTraining() {
-  const nameInput = document.getElementById("participantName").value.trim();
+  const nameInputEl = document.getElementById("participantName");
+  if (!nameInputEl) return;
+  const nameInput = nameInputEl.value.trim();
   if (nameInput === "") {
     alert("Por favor ingresa tu nombre antes de iniciar.");
     return;
@@ -67,17 +74,28 @@ function startTraining() {
 
   participant = nameInput; // guardar nombre
   document.getElementById("startSection").style.display = "none";
-  document.getElementById("quiz").style.display = "block";
+
+  const welcome = document.getElementById("welcomeMessage");
+  if (welcome) {
+    welcome.textContent = `Bienvenido, ${participant}. Inicia el cuestionario.`;
+    welcome.style.display = "block";
+  }
+
+  const quizDiv = document.getElementById("quiz");
+  if (quizDiv) quizDiv.style.display = "block";
 }
 
 function updateProgress() {
   const bar = document.getElementById("progress-bar");
+  if (!bar) return;
   bar.style.width = progress + "%";
   bar.textContent = progress + "%";
 
   if (progress === 100) {
-    document.getElementById("finalMessage").style.display = "block";
-    document.getElementById("downloadCert").style.display = "inline-block";
+    const finalMsg = document.getElementById("finalMessage");
+    if (finalMsg) finalMsg.style.display = "block";
+    const dl = document.getElementById("downloadCert");
+    if (dl) dl.style.display = "inline-block";
   }
 }
 
@@ -90,6 +108,7 @@ function checkAnswer(questionNumber, option) {
   };
 
   const result = document.getElementById("quizResult" + questionNumber);
+  if (!result) return;
 
   if (option === correctAnswers[questionNumber]) {
     result.textContent = "✅ Correcto";
@@ -133,7 +152,7 @@ function generateCertificate() {
   // 👉 Nombre dinámico
   doc.setFont("helvetica", "bold");
   doc.setFontSize(18);
-  doc.text(participant, 30, 80);
+  doc.text(participant || "Participante", 30, 80);
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(14);

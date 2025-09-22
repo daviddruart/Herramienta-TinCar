@@ -48,7 +48,8 @@
 
     <h3>Progreso de Capacitación</h3>
     <div class="progress-container">
-      <div id="progress-bar">0%</</div>
+      <!-- ✅ CORRECCIÓN: quitar el '/' extra -->
+      <div id="progress-bar">0%</div>
     </div>
 
     <!-- 👉 Formulario de inicio -->
@@ -57,6 +58,9 @@
       <input type="text" id="participantName" placeholder="Tu nombre aquí">
       <button onclick="startTraining()">Iniciar Capacitación</button>
     </div>
+
+    <!-- Mensaje de bienvenida (se muestra al iniciar) -->
+    <p id="welcomeMessage" style="display:none; font-weight:bold; margin-top:10px;"></p>
 
     <!-- 👉 Cuestionario oculto hasta que inicie -->
     <div id="quiz" style="display:none;">
