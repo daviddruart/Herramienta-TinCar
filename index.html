@@ -48,11 +48,18 @@
 
     <h3>Progreso de Capacitación</h3>
     <div class="progress-container">
-      <div id="progress-bar">0%</div>
+      <div id="progress-bar">0%</</div>
     </div>
 
-    <h3>Cuestionario de Capacitación</h3>
-    <div id="quiz">
+    <!-- 👉 Formulario de inicio -->
+    <div id="startSection">
+      <p><b>Ingresa tu nombre para iniciar la capacitación:</b></p>
+      <input type="text" id="participantName" placeholder="Tu nombre aquí">
+      <button onclick="startTraining()">Iniciar Capacitación</button>
+    </div>
+
+    <!-- 👉 Cuestionario oculto hasta que inicie -->
+    <div id="quiz" style="display:none;">
       <!-- Pregunta 1 -->
       <div class="question">
         <p><b>Pregunta 1:</b> ¿Cuál es el objetivo principal de la norma ISO 9001?</p>
@@ -90,12 +97,16 @@
       </div>
     </div>
 
-    <h3 id="finalMessage" style="display:none; color:green;">🎉 ¡Felicidades! Has completado la capacitación al 100%.</h3>
+    <h3 id="finalMessage" style="display:none; color:green;">
+      🎉 ¡Felicidades! Has completado la capacitación al 100%.
+    </h3>
 
+    <!-- Botón para descargar certificado -->
     <button id="downloadCert" style="display:none;" onclick="generateCertificate()">
       📜 Descargar Certificado
     </button>
   </div>
+
 
   <!-- Auditoría -->
   <div id="aud" class="content">

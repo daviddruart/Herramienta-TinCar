@@ -51,10 +51,24 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ===============================
-//  CAPACITACIÓN: QUIZ Y PROGRESO
+//  CAPACITACIÓN: NOMBRE + QUIZ Y PROGRESO
 // ===============================
 let progress = 0;
 let currentQuestion = 1;
+let participant = ""; // 👉 Nombre del participante
+
+// Iniciar capacitación pidiendo nombre
+function startTraining() {
+  const nameInput = document.getElementById("participantName").value.trim();
+  if (nameInput === "") {
+    alert("Por favor ingresa tu nombre antes de iniciar.");
+    return;
+  }
+
+  participant = nameInput; // guardar nombre
+  document.getElementById("startSection").style.display = "none";
+  document.getElementById("quiz").style.display = "block";
+}
 
 function updateProgress() {
   const bar = document.getElementById("progress-bar");
@@ -114,18 +128,26 @@ function generateCertificate() {
   // Contenido
   doc.setFont("helvetica", "normal");
   doc.setFontSize(14);
-  doc.text("Se certifica que el participante ha completado", 30, 70);
-  doc.text("satisfactoriamente el curso de capacitación en", 30, 80);
-  doc.text("Gestión de Calidad ISO 9001.", 30, 90);
+  doc.text("Se certifica que:", 30, 65);
+
+  // 👉 Nombre dinámico
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(18);
+  doc.text(participant, 30, 80);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(14);
+  doc.text("Ha completado satisfactoriamente el curso de", 30, 100);
+  doc.text("capacitación en Gestión de Calidad ISO 9001.", 30, 110);
 
   // Firma simulada
   doc.setFont("helvetica", "italic");
-  doc.text("Otorgado por: Simulador ISO 9001", 30, 120);
+  doc.text("Otorgado por: Simulador ISO 9001", 30, 130);
 
   // Fecha actual
   const today = new Date();
   const date = today.toLocaleDateString();
-  doc.text("Fecha: " + date, 30, 130);
+  doc.text("Fecha: " + date, 30, 140);
 
   // Guardar PDF
   doc.save("Certificado_ISO9001.pdf");
