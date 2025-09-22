@@ -120,3 +120,17 @@ ul {
   border-radius: 6px;
   cursor: pointer;
 }
+
+#downloadCert {
+  margin-top: 15px;
+  background: #28a745;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#downloadCert:hover {
+  background: #218838;
+}

@@ -56,6 +56,7 @@ function updateProgress() {
   bar.textContent = progress + "%";
   if (progress === 100) {
     document.getElementById("finalMessage").style.display = "block";
+    document.getElementById("downloadCert").style.display = "inline-block";
   }
 }
 
@@ -90,4 +91,31 @@ function checkAnswer(questionNumber, option) {
     result.textContent = "❌ Incorrecto. Intenta de nuevo.";
     result.style.color = "red";
   }
+}
+
+// --- CERTIFICADO EN PDF ---
+function generateCertificate() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(20);
+  doc.text("Certificado de Capacitación", 60, 40);
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(14);
+  doc.text("Se certifica que el participante ha completado", 30, 70);
+  doc.text("satisfactoriamente el curso de capacitación en", 30, 80);
+  doc.text("Gestión de Calidad TinCar ISO 9001.", 30, 90);
+
+  doc.setFont("helvetica", "italic");
+  doc.text("Otorgado por: Simulador TinCar ISO 9001", 30, 120);
+
+  // Fecha automática
+  const today = new Date();
+  const date = today.toLocaleDateString();
+  doc.text("Fecha: " + date, 30, 130);
+
+  // Guardar PDF
+  doc.save("Certificado_TinCarISO9001.pdf");
 }
