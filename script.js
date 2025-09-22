@@ -48,22 +48,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- PROGRESO CAPACITACIÓN ---
 let progress = 0;
+let currentQuestion = 1;
 
-function increaseProgress() {
-  if (progress < 100) {
-    progress += 25; // cada click aumenta 25%
-    const bar = document.getElementById("progress-bar");
-    bar.style.width = progress + "%";
-    bar.textContent = progress + "%";
+function updateProgress() {
+  const bar = document.getElementById("progress-bar");
+  bar.style.width = progress + "%";
+  bar.textContent = progress + "%";
+  if (progress === 100) {
+    document.getElementById("finalMessage").style.display = "block";
   }
 }
 
-// --- MINI QUIZ ---
-function checkAnswer(option) {
-  const result = document.getElementById("quizResult");
-  if (option === "b") {
-    result.textContent = "✅ ¡Correcto! La ISO 9001 se enfoca en la satisfacción del cliente y la mejora continua.";
+// --- QUIZ MULTIPREGUNTA ---
+function checkAnswer(questionNumber, option) {
+  const correctAnswers = {
+    1: "b",
+    2: "a",
+    3: "b",
+    4: "a"
+  };
+
+  const result = document.getElementById("quizResult" + questionNumber);
+
+  if (option === correctAnswers[questionNumber]) {
+    result.textContent = "✅ Correcto";
     result.style.color = "green";
+
+    // aumentar progreso solo si está en la pregunta actual
+    if (questionNumber === currentQuestion) {
+      progress += 25;
+      updateProgress();
+
+      // mostrar siguiente pregunta si existe
+      const nextQuestion = document.querySelectorAll(".question")[questionNumber];
+      if (nextQuestion) {
+        nextQuestion.style.display = "block";
+      }
+      currentQuestion++;
+    }
   } else {
     result.textContent = "❌ Incorrecto. Intenta de nuevo.";
     result.style.color = "red";

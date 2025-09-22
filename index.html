@@ -49,15 +49,47 @@
     <div class="progress-container">
       <div id="progress-bar">0%</div>
     </div>
-    <button onclick="increaseProgress()">Marcar tema como completado</button>
 
-    <h3>Mini Cuestionario</h3>
-    <p><b>Pregunta:</b> ¿Cuál es el objetivo principal de la norma ISO 9001?</p>
-    <button onclick="checkAnswer('a')">a) Reducir costos de producción</button>
-    <button onclick="checkAnswer('b')">b) Asegurar la satisfacción del cliente y mejora continua</button>
-    <button onclick="checkAnswer('c')">c) Incrementar ventas</button>
+    <h3>Cuestionario de Capacitación</h3>
+    <div id="quiz">
+      <!-- Pregunta 1 -->
+      <div class="question">
+        <p><b>Pregunta 1:</b> ¿Cuál es el objetivo principal de la norma ISO 9001?</p>
+        <button onclick="checkAnswer(1,'a')">a) Reducir costos de producción</button>
+        <button onclick="checkAnswer(1,'b')">b) Asegurar la satisfacción del cliente y mejora continua</button>
+        <button onclick="checkAnswer(1,'c')">c) Incrementar ventas</button>
+        <p id="quizResult1"></p>
+      </div>
 
-    <p id="quizResult"></p>
+      <!-- Pregunta 2 -->
+      <div class="question" style="display:none;">
+        <p><b>Pregunta 2:</b> ¿Qué deben conocer todos los empleados en un sistema ISO 9001?</p>
+        <button onclick="checkAnswer(2,'a')">a) Su rol y responsabilidades dentro del sistema</button>
+        <button onclick="checkAnswer(2,'b')">b) El sueldo de sus compañeros</button>
+        <button onclick="checkAnswer(2,'c')">c) Los proyectos de la competencia</button>
+        <p id="quizResult2"></p>
+      </div>
+
+      <!-- Pregunta 3 -->
+      <div class="question" style="display:none;">
+        <p><b>Pregunta 3:</b> ¿Qué se busca con la capacitación en ISO 9001?</p>
+        <button onclick="checkAnswer(3,'a')">a) Cumplir solo con requisitos legales</button>
+        <button onclick="checkAnswer(3,'b')">b) Sensibilizar y fortalecer la mejora continua</button>
+        <button onclick="checkAnswer(3,'c')">c) Evitar auditorías externas</button>
+        <p id="quizResult3"></p>
+      </div>
+
+      <!-- Pregunta 4 -->
+      <div class="question" style="display:none;">
+        <p><b>Pregunta 4:</b> ¿Qué herramienta se utiliza para medir el desempeño de procesos?</p>
+        <button onclick="checkAnswer(4,'a')">a) Indicadores de gestión</button>
+        <button onclick="checkAnswer(4,'b')">b) Opiniones personales</button>
+        <button onclick="checkAnswer(4,'c')">c) Redes sociales</button>
+        <p id="quizResult4"></p>
+      </div>
+    </div>
+
+    <h3 id="finalMessage" style="display:none; color:green;">🎉 ¡Felicidades! Has completado la capacitación al 100%.</h3>
   </div>
 
   <!-- Auditoría -->
