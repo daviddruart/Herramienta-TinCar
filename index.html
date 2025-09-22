@@ -1,57 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Herramienta TinCar</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Sistema ISO 9001</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Gestión de calidad - ISO 9001 - TinCar</h1>
-    <p>Implementacón • Capacitación • Auditoría</p>
-  </header>
-  <div class="container">
-    <button onclick="toggleContent('impl')">Implementación</button>
-    <button onclick="toggleContent('cap')">Capacitación</button>
-    <button onclick="toggleContent('aud')">Auditoría</button>
 
-    <div id="impl" class="content">
-      <h2>Implementación</h2>
-      <p>Documentos:</p>
-      <ul>
-        <li>Diagnóstico inicial de brechas respecto a la norma.</li>
-        <li>Definición de la política y los objetivos de calidad.</li>
-        <li>Documentación de procesos, procedimientos e indicadores.</li>
-        <li>Establecimiento de controles y responsabilidades.</li>
-        <li>Integración de la gestión de calidad en la operación diaria.</li>
-      </ul>
-      <p><b>Subir archivos:</b></p>
-      <input type="file" multiple>
-    </div>
+<header>
+  <h1>Gestión de Calidad - ISO 9001</h1>
+  <p>Implementación • Capacitación • Auditoría</p>
+</header>
 
-    <div id="cap" class="content">
-      <h2>Capacitación</h2>
-      <ul>
-        <li>Formación en la norma ISO 9001 y sus requisitos.</li>
-        <li>Capacitación en procedimientos, roles y responsabilidades.</li>
-        <li>Sensibilización sobre la importancia de la satisfacción del cliente y la mejora continua.</li>
-        <li>Entrenamiento en herramientas de control y medición de procesos.</li>
-      </ul>
-    </div>
+<div class="container">
+  <button onclick="toggleContent('impl')">Implementación</button>
+  <button onclick="toggleContent('cap')">Capacitación</button>
+  <button onclick="toggleContent('aud')">Auditoría</button>
 
-    <div id="aud" class="content">
-      <h2>Auditoría</h2>
-      <ul>
-        <li><b>Auditoría interna:</b> realizada por la propia organización para revisar el cumplimiento de procesos.</li>
-        <li><b>Auditoría externa (de certificación):</b> realizada por un ente acreditado.</li>
-        <li>Identificación de no conformidades, observaciones y áreas de mejora.</li>
-        <li>Planes de acción correctiva y seguimiento.</li>
-      </ul>
-    </div>
+  <!-- Implementación -->
+  <div id="impl" class="content">
+    <h2>Implementación</h2>
+    <p>Documentos:</p>
+    <ul>
+      <li>Diagnóstico inicial de brechas respecto a la norma.</li>
+      <li>Definición de la política y los objetivos de calidad.</li>
+      <li>Documentación de procesos, procedimientos e indicadores.</li>
+      <li>Establecimiento de controles y responsabilidades.</li>
+      <li>Integración de la gestión de calidad en la operación diaria.</li>
+    </ul>
+    <p><b>Subir archivos:</b></p>
+    <input type="file" id="fileInput" multiple>
+    <div id="fileList"></div>
   </div>
 
+  <!-- Capacitación -->
+  <div id="cap" class="content">
+    <h2>Capacitación</h2>
+    <ul>
+      <li>Formación en la norma ISO 9001 y sus requisitos.</li>
+      <li>Capacitación en procedimientos, roles y responsabilidades.</li>
+      <li>Sensibilización sobre la importancia de la satisfacción del cliente y la mejora continua.</li>
+      <li>Entrenamiento en herramientas de control y medición de procesos.</li>
+    </ul>
+  </div>
+
+  <!-- Auditoría -->
+  <div id="aud" class="content">
+    <h2>Auditoría</h2>
+    <ul>
+      <li><b>Auditoría interna:</b> realizada por la propia organización para revisar el cumplimiento de procesos.</li>
+      <li><b>Auditoría externa (de certificación):</b> realizada por un ente acreditado.</li>
+      <li>Identificación de no conformidades, observaciones y áreas de mejora.</li>
+      <li>Planes de acción correctiva y seguimiento.</li>
+    </ul>
+  </div>
+</div>
+
 <script src="script.js"></script>
-  
 </body>
 </html>
