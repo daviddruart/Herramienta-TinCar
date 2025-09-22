@@ -37,12 +37,27 @@
   <!-- Capacitación -->
   <div id="cap" class="content">
     <h2>Capacitación</h2>
+    <p>Temas principales:</p>
     <ul>
       <li>Formación en la norma ISO 9001 y sus requisitos.</li>
       <li>Capacitación en procedimientos, roles y responsabilidades.</li>
       <li>Sensibilización sobre la importancia de la satisfacción del cliente y la mejora continua.</li>
       <li>Entrenamiento en herramientas de control y medición de procesos.</li>
     </ul>
+
+    <h3>Progreso de Capacitación</h3>
+    <div class="progress-container">
+      <div id="progress-bar">0%</div>
+    </div>
+    <button onclick="increaseProgress()">Marcar tema como completado</button>
+
+    <h3>Mini Cuestionario</h3>
+    <p><b>Pregunta:</b> ¿Cuál es el objetivo principal de la norma ISO 9001?</p>
+    <button onclick="checkAnswer('a')">a) Reducir costos de producción</button>
+    <button onclick="checkAnswer('b')">b) Asegurar la satisfacción del cliente y mejora continua</button>
+    <button onclick="checkAnswer('c')">c) Incrementar ventas</button>
+
+    <p id="quizResult"></p>
   </div>
 
   <!-- Auditoría -->

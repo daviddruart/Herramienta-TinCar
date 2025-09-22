@@ -44,3 +44,28 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 });
+
+
+// --- PROGRESO CAPACITACIÓN ---
+let progress = 0;
+
+function increaseProgress() {
+  if (progress < 100) {
+    progress += 25; // cada click aumenta 25%
+    const bar = document.getElementById("progress-bar");
+    bar.style.width = progress + "%";
+    bar.textContent = progress + "%";
+  }
+}
+
+// --- MINI QUIZ ---
+function checkAnswer(option) {
+  const result = document.getElementById("quizResult");
+  if (option === "b") {
+    result.textContent = "✅ ¡Correcto! La ISO 9001 se enfoca en la satisfacción del cliente y la mejora continua.";
+    result.style.color = "green";
+  } else {
+    result.textContent = "❌ Incorrecto. Intenta de nuevo.";
+    result.style.color = "red";
+  }
+}
