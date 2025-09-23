@@ -371,3 +371,32 @@ function updateAuditStats() {
     if (barOpen) barOpen.style.background = "#f0ad4e"; // naranja para abiertos
   }
 }
+
+/* ======= MÓDULO AUDITORÍA: CHECKLIST Y SIMULACIÓN ======= */
+function evaluateAudit() {
+  const checks = document.querySelectorAll("#checklistForm input[type='checkbox']:checked");
+  const result = document.getElementById("auditResult");
+  const score = checks.length;
+
+  if (score === 5) {
+    result.textContent = "✅ Auditoría interna aprobada. Listo para certificación.";
+    result.style.color = "green";
+  } else if (score >= 3) {
+    result.textContent = "⚠️ Auditoría parcial: faltan " + (5 - score) + " puntos por cumplir.";
+    result.style.color = "orange";
+  } else {
+    result.textContent = "❌ Auditoría incompleta. Muchos requisitos sin cumplir.";
+    result.style.color = "red";
+  }
+}
+
+function runAudit(type) {
+  const result = document.getElementById("simulationResult");
+  if (type === "interna") {
+    result.textContent = "🔍 Auditoría interna realizada: Se identificaron 2 no conformidades menores y 3 oportunidades de mejora.";
+    result.style.color = "blue";
+  } else {
+    result.textContent = "🏆 Auditoría externa completada: Certificación ISO 9001 recomendada con 1 observación menor.";
+    result.style.color = "green";
+  }
+}
