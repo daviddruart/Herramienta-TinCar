@@ -171,3 +171,203 @@ function generateCertificate() {
   // Guardar PDF
   doc.save("Certificado_ISO9001.pdf");
 }
+
+
+/* ======= MÓDULO AUDITORÍA ======= */
+// Estructura: { id, type, title, desc, severity, owner, due (ISO), status: "Abierto"/"Cerrado", created }
+let auditFindings = [];
+
+// Cargar desde localStorage si existe
+(function loadAudit() {
+  try {
+    const raw = localStorage.getItem("auditFindings_v1");
+    if (raw) auditFindings = JSON.parse(raw);
+  } catch (e) {
+    auditFindings = [];
+  }
+  renderAuditTable();
+  updateAuditStats();
+})();
+
+// DOM references
+const addAuditBtn = document.getElementById("addAuditBtn");
+const clearAuditBtn = document.getElementById("clearAuditBtn");
+
+if (addAuditBtn) addAuditBtn.addEventListener("click", addFinding);
+if (clearAuditBtn) clearAuditBtn.addEventListener("click", clearAuditForm);
+
+function saveAuditStorage() {
+  localStorage.setItem("auditFindings_v1", JSON.stringify(auditFindings));
+}
+
+function addFinding() {
+  const type = document.getElementById("auditType").value;
+  const title = document.getElementById("auditTitle").value.trim();
+  const desc = document.getElementById("auditDesc").value.trim();
+  const severity = document.getElementById("auditSeverity").value;
+  const owner = document.getElementById("auditOwner").value.trim();
+  const due = document.getElementById("auditDue").value; // ISO yyyy-mm-dd
+
+  if (!title || !desc || !owner || !due) {
+    alert("Por favor completa título, descripción, responsable y fecha límite.");
+    return;
+  }
+
+  const id = Date.now(); // simple id
+  const created = new Date().toISOString();
+  auditFindings.unshift({ id, type, title, desc, severity, owner, due, status: "Abierto", created });
+  saveAuditStorage();
+  renderAuditTable();
+  updateAuditStats();
+  clearAuditForm();
+}
+
+function clearAuditForm() {
+  document.getElementById("auditTitle").value = "";
+  document.getElementById("auditDesc").value = "";
+  document.getElementById("auditOwner").value = "";
+  document.getElementById("auditDue").value = "";
+  document.getElementById("auditSeverity").value = "Mayor";
+  document.getElementById("auditType").value = "Interna";
+}
+
+function renderAuditTable() {
+  const tbody = document.querySelector("#auditTable tbody");
+  const noFindings = document.getElementById("noFindings");
+  if (!tbody) return;
+
+  tbody.innerHTML = "";
+  if (auditFindings.length === 0) {
+    noFindings.style.display = "block";
+    return;
+  } else {
+    noFindings.style.display = "none";
+  }
+
+  auditFindings.forEach((f, idx) => {
+    const tr = document.createElement("tr");
+
+    // index
+    const tdIndex = document.createElement("td");
+    tdIndex.textContent = auditFindings.length - idx; // contador descendente
+    tr.appendChild(tdIndex);
+
+    // type
+    const tdType = document.createElement("td");
+    tdType.textContent = f.type;
+    tr.appendChild(tdType);
+
+    // title (hover show desc)
+    const tdTitle = document.createElement("td");
+    const titleEl = document.createElement("div");
+    titleEl.textContent = f.title;
+    titleEl.title = f.desc;
+    tdTitle.appendChild(titleEl);
+    tr.appendChild(tdTitle);
+
+    // severity badge
+    const tdSev = document.createElement("td");
+    const badge = document.createElement("span");
+    badge.className = `badge ${f.severity.replace(/\s/g, '')}`;
+    badge.textContent = f.severity;
+    tdSev.appendChild(badge);
+    tr.appendChild(tdSev);
+
+    // owner
+    const tdOwner = document.createElement("td");
+    tdOwner.textContent = f.owner;
+    tr.appendChild(tdOwner);
+
+    // due date (format)
+    const tdDue = document.createElement("td");
+    tdDue.textContent = f.due;
+    // mark overdue with red if past and still open
+    const dueDate = new Date(f.due + "T23:59:59");
+    if (f.status === "Abierto" && dueDate < new Date()) {
+      tdDue.style.color = "#c82333";
+      tdDue.style.fontWeight = "700";
+    }
+    tr.appendChild(tdDue);
+
+    // status
+    const tdStatus = document.createElement("td");
+    tdStatus.textContent = f.status;
+    tdStatus.className = f.status === "Cerrado" ? "status-closed" : "status-open";
+    tr.appendChild(tdStatus);
+
+    // actions
+    const tdActions = document.createElement("td");
+
+    // close button
+    if (f.status === "Abierto") {
+      const closeBtn = document.createElement("button");
+      closeBtn.textContent = "Cerrar";
+      closeBtn.className = "audit-action-btn close";
+      closeBtn.onclick = () => closeFinding(f.id);
+      tdActions.appendChild(closeBtn);
+    }
+
+    // delete button
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "Eliminar";
+    delBtn.className = "audit-action-btn delete";
+    delBtn.onclick = () => {
+      if (confirm("Eliminar hallazgo? Esta acción es irreversible.")) deleteFinding(f.id);
+    };
+    tdActions.appendChild(delBtn);
+
+    tr.appendChild(tdActions);
+
+    tbody.appendChild(tr);
+  });
+}
+
+function closeFinding(id) {
+  const idx = auditFindings.findIndex(x => x.id === id);
+  if (idx === -1) return;
+  auditFindings[idx].status = "Cerrado";
+  saveAuditStorage();
+  renderAuditTable();
+  updateAuditStats();
+}
+
+function deleteFinding(id) {
+  auditFindings = auditFindings.filter(x => x.id !== id);
+  saveAuditStorage();
+  renderAuditTable();
+  updateAuditStats();
+}
+
+function updateAuditStats() {
+  const total = auditFindings.length;
+  const closed = auditFindings.filter(x => x.status === "Cerrado").length;
+  const open = auditFindings.filter(x => x.status === "Abierto").length;
+  const overdue = auditFindings.filter(x => {
+    if (x.status !== "Abierto") return false;
+    const due = new Date(x.due + "T23:59:59");
+    return due < new Date();
+  }).length;
+
+  // DOM updates
+  const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  setText("statTotal", total);
+  setText("statClosed", closed);
+  setText("statOpen", open);
+  setText("statOverdue", overdue);
+
+  // progress bars: closed %
+  const closedPct = total === 0 ? 0 : Math.round((closed / total) * 100);
+  const openPct = total === 0 ? 0 : Math.round((open / total) * 100);
+
+  const barClosed = document.getElementById("barClosed");
+  const barOpen = document.getElementById("barOpen");
+  if (barClosed) { barClosed.style.width = closedPct + "%"; barClosed.textContent = closedPct + "%"; }
+  if (barOpen) { barOpen.style.width = openPct + "%"; barOpen.textContent = openPct + "%"; }
+
+  // if any overdue, color barOpen red a bit
+  if (overdue > 0) {
+    if (barOpen) barOpen.style.background = "#dc3545"; // rojo
+  } else {
+    if (barOpen) barOpen.style.background = "#f0ad4e"; // naranja para abiertos
+  }
+}

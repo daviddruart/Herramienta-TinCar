@@ -115,13 +115,107 @@
   <!-- Auditoría -->
   <div id="aud" class="content">
     <h2>Auditoría</h2>
-    <ul>
-      <li><b>Auditoría interna:</b> realizada por la propia organización para revisar el cumplimiento de procesos.</li>
-      <li><b>Auditoría externa (de certificación):</b> realizada por un ente acreditado.</li>
-      <li>Identificación de no conformidades, observaciones y áreas de mejora.</li>
-      <li>Planes de acción correctiva y seguimiento.</li>
-    </ul>
+    <p>Registra hallazgos, asigna acciones correctivas y controla el cierre.</p>
+
+    <!-- Formulario para agregar hallazgo -->
+    <div class="audit-form">
+      <h3>Registrar hallazgo</h3>
+      <label>Tipo:
+        <select id="auditType">
+          <option value="Interna">Interna</option>
+          <option value="Externa">Externa</option>
+        </select>
+      </label>
+
+      <label>Título:
+        <input type="text" id="auditTitle" placeholder="Título del hallazgo">
+      </label>
+
+      <label>Descripción:
+        <textarea id="auditDesc" rows="3" placeholder="Breve descripción"></textarea>
+      </label>
+
+      <label>Severidad:
+        <select id="auditSeverity">
+          <option value="Mayor">Mayor</option>
+          <option value="Menor">Menor</option>
+          <option value="Oportunidad">Oportunidad de mejora</option>
+        </select>
+      </label>
+
+      <label>Responsable:
+        <input type="text" id="auditOwner" placeholder="Nombre del responsable">
+      </label>
+
+      <label>Fecha límite:
+        <input type="date" id="auditDue">
+      </label>
+
+      <div class="audit-form-actions">
+        <button id="addAuditBtn">Añadir hallazgo</button>
+        <button id="clearAuditBtn" class="secondary">Limpiar formulario</button>
+      </div>
+    </div>
+
+    <!-- Estadísticas -->
+    <div class="audit-stats">
+      <h3>Estadísticas</h3>
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-label">Total hallazgos</div>
+          <div id="statTotal">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Abiertos</div>
+          <div id="statOpen">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Cerrados</div>
+          <div id="statClosed">0</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">En seguimiento (vencidos)</div>
+          <div id="statOverdue">0</div>
+        </div>
+      </div>
+
+      <div class="progress-bars">
+        <div class="progress-label">Conformidad (cerrados)</div>
+        <div class="small-progress">
+          <div id="barClosed" class="small-progress-fill">0%</div>
+        </div>
+
+        <div class="progress-label">No conformidades (abiertos)</div>
+        <div class="small-progress">
+          <div id="barOpen" class="small-progress-fill">0%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de hallazgos -->
+    <div class="audit-table">
+      <h3>Hallazgos</h3>
+      <table id="auditTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tipo</th>
+            <th>Título</th>
+            <th>Severidad</th>
+            <th>Responsable</th>
+            <th>Vence</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- filas generadas por JS -->
+        </tbody>
+      </table>
+      <p id="noFindings" style="display:none;">No hay hallazgos registrados.</p>
+    </div>
   </div>
+
 </div>
 
 <script src="script.js"></script>
